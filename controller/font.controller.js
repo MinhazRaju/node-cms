@@ -273,6 +273,7 @@ exports.Search = (req, res, next) => {
 }
 
 
+
 exports.LikeQerySetting = (req, res) => {
 
 
@@ -287,7 +288,7 @@ exports.LikeQerySetting = (req, res) => {
         }
     }).then(previousData => {
         res.sendStatus(200)
-        res.setHeader('x1', 'done')
+        
 
 
         if (count === 1) {
@@ -317,23 +318,21 @@ exports.LikeQerySetting = (req, res) => {
                 }
             }).then(() => {
                 res.sendStatus(200)
-                res.setHeader('x2', 'done')
+                
               
             }).catch(err=>{
-              
+              console.log('like decremtnt')
             })
 
         }
     }).catch(err => {
-    
+        console.log('')
        
     })
 
 
 
 }
-
-
 
 
 
