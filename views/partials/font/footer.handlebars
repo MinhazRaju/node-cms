@@ -1,0 +1,64 @@
+</div>
+<!-- /.row -->
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+  <div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+  </div>
+  <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+
+<script src="font-asset/vendor/jquery/jquery.min.js"></script>
+<script src="font-asset/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="font-asset/vendor/like/likeFunction.js"></script>
+
+
+
+
+<script type="text/javascript">
+
+
+  $(document).ready(function () {
+
+    $('.ajaxd').click(function (e, data) {
+
+      const id = $(this).attr('value')
+      const commentId = $(this).attr('commentid')
+      console.log(commentId)
+
+      $.ajax({
+        type: 'GET',
+        url: '/admin/comment/personal/' + id,
+        cache: false,
+        success: function (data) {
+          console.log(data)
+          if (data._id == commentId) {
+            $(`[uniqueIdentify=${commentId}]`).fadeOut(200)
+          }
+        },
+      })
+    })
+  })
+
+
+</script>
+
+
+       
+    
+
+
+
+  
+   
+
+</body>
+
+</html>

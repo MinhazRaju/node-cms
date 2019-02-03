@@ -1,0 +1,86 @@
+{{#if user.power}}
+<div class="container-fluid ">
+  <!-- Breadcrumbs-->
+
+  <h1>Category</h1>
+
+
+  <div class="row">
+
+    <div class="col-md-6">
+
+
+      {{#if fetchingEdit}}
+      <form action="/admin/category/edit/{{fetchingEdit.id}}" method="post">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Title</label>
+          <input type="title" name="cattitle" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Enter email" value="{{fetchingEdit.cattitle}}">
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">update</button>
+        <a href="/admin/category" class="btn btn-danger">cancle</a>
+      </form>
+
+      {{else}}
+
+      <form action="/admin/category/create" method="post">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Title</label>
+          <input type="title" name="cattitle" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Enter email" value="{{fetchingEdit.cattitle}}">
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+
+      {{/if}}
+
+    </div>
+
+
+    {{#if fetchingCategory}}
+    <div class="col-md-6">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">TITLE</th>
+            <th scope="col">EDIT</th>
+            <th scope="col">DELETE</th>
+          </tr>
+        </thead>
+        <tbody>
+
+
+          {{#each fetchingCategory}}
+          <tr>
+            <th scope="row">{{ tirmId id}}</th>
+            <td>{{cattitle}}</td>
+            <td> <a href="/admin/category/edit/{{id}}" class="btn btn-info">Edit</a> </td>
+            <td><a class="loader" href="/admin/category/delete/{{id}}" class="btn"><i class="trash icon"></i></a></td>
+          </tr>
+          {{/each}}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{{else}}
+<div class="ui olive message">
+  <h2>No Category</h2>
+</div>
+{{/if}}
+<!-- show category  -->
+</div>
+{{else}}
+<div class="ui teal message">
+  <h1 class="text-center">Sorry !! You can't access, contract your admin <a href="#">contract</a></h1>
+</div>
+{{/if}}

@@ -1,0 +1,89 @@
+<div class="container-fluid">
+  <!-- Breadcrumbs-->
+
+  {{#if fetchingPosts}}
+
+  <table class="table table-light">
+
+    <thead>
+      <tr>
+        <th scope="col"><input id="allselect" type="checkbox"></th>
+        <th scope="col">ID</th>
+        <th scope="col">TITLE</th>
+        <th scope="col">CATEGORY</th>
+        <th scope="col">AUTHOR</th>
+        <th scope="col">ALLOWCOMMENTS</th>
+        <th scope='col'>IMAGES</th>
+        <th scope="col">DATE</th>
+        <th scope="col">ENABEL/DISABLE</th>
+        <th scope="col">VIEW POST</th>
+        <th scope="col">EDIT</th>
+        <th scope="col">DELETE</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <form action="/admin/posts/deleteMany" method="post">
+
+
+
+        {{#each fetchingPosts}}
+
+        <tr><th scope="row"><input class="singleselect" type="checkbox" name='checkbox' value={{id}}></th>
+          <th scope="row">{{ tirmId id }}</th>
+          <td>{{title}}</td>
+          <td>{{category.cattitle}}</td>
+          <td><b>{{user.firstName}}</b></td>
+          <td>{{allowComments}}</td>
+          <td><img class="img-responsive" height="50" width="80" src={{file}}></td>
+          <td>{{Date createdAt 'MMMM Do YYYY'}}</td>
+          {{ userPower}}
+          <th><input data-id={{id}} type="checkbox" {{#if allowPost}} checked="checked" {{/if}} name="approvePosts"></th>
+          <td><a href="/singlePosts/{{slugs}}" class="btn btn-success {{#if allowPost}}  {{else}} not-active {{/if}} {{id}}">{{#if
+              allowPost}} View Post {{else}} Disabled {{/if}}</a>
+          </td>
+          <td><a href="/admin/posts/edit/{{id}}" class="btn btn-light">Eidt</i></a></td>
+          <td><a class="loader" href="/admin/posts/delete/{{id}}" class="btn"><i class="trash icon"></i></a></td>
+        </tr>
+        {{/each}}
+        <br>
+
+        <!-- Button trigger modal -->
+        {{#if user.power}}
+        <button id="dd" disabled="disabled" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalLong"
+          style="cursor:pointer">
+          <i class="trash alternate icon "></i>
+        </button>
+        {{/if}}
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Are you sure delete selected post??
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Dissmiss</button>
+                <button class="btn btn-danger loader" type="submit">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </tbody>
+  </table>
+  {{else}}
+  <div class="ui olive message">
+    <h2>0 Post!!</h2> <a href="/admin/posts/create" class="btn btn-info">Add Some</a>
+  </div>
+  {{/if}}
+
+</div>

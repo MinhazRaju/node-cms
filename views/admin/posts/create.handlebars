@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  
+ 
+  <h1>Creat post</h1>
+
+  <form action="/admin/posts/create" method="post" enctype="multipart/form-data">
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Title</label>
+      <input type="title" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+        placeholder="Enter email">
+    </div>
+
+
+    <div class="form-group">
+      <label for="exampleInputPassword1">Category</label>
+      <select name="category" id="stauts" class="form-control">
+        {{#each fetchingCategory}}
+        <option value={{id}}>{{cattitle}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+
+
+    <div class="form-group">
+      <label for="exampleInputPassword1">Status</label>
+      <select name="status" id="stauts" class="form-control">
+        <option value="public">Public</option>
+        <option value="draft">Draft</option>
+      </select>
+    </div>
+
+
+    <div class="form-check">
+      <label for="allowComments" class="form-check-label">
+        <input name="allowComments" type="checkbox" class="form-check-input" id="allowComments">
+        Allow Comments
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label for="body">Body</label>
+      <textarea name="body" cols="30" rows="10" class="form-control" id="body" placeholder="Enter Description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="files">File Upload</label>
+      <input type="file" name="filedata">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

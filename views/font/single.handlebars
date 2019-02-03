@@ -1,0 +1,91 @@
+<div class="col-md-8">
+
+    {{#if fetchingPosts}}
+
+    <!-- Blog Post -->
+    <div class="card mb-4">
+        <img class="card-img-top" src="{{fetchingPosts.file}}" alt="Card image cap">
+        <div class="card-body">
+            <h2 class="card-title">{{fetchingPosts.title}}</h2>
+            <p class="card-text">{{fetchingPosts.body}}</p>
+        </div>
+
+        <div class="card-footer text-muted">
+            Posted on {{Date createdAt 'MMMM Do YYYY'}} by <sapn style="text-transform:capitalize"><b>{{fetchingPosts.user.firstName}}
+                    <br><br><span style="font-size:16px">Views : {{fetchingPosts.views}}</b></sapn>
+            </sapn><br>
+
+            <br>
+
+            {{#if user}} <button type="button" class="btn btn-outline-{{#if like}}danger {{else}}success{{/if}}" id="like"
+                data-post-id="{{fetchingPosts.id}}">{{#if like}}Unlike {{else}}Like {{/if}} <i class="thumbs{{#if like}} down{{else}} up{{/if}} outline icon"></i></button>{{/if}}
+            <br>
+            <br>
+
+            <div id='likeViews'>Total Likes<p style="font-size:50px"><b>
+                        <style="font-weight:200">{{fetchingPosts.likesCount}}
+                    </b></p>
+            </div>
+            <br>
+            <div id="showlike">
+
+                <ul id="d">
+
+                    {{#each fetchingPosts.likers}}
+                    <i class="thumbs up outline icon"></i>{{firstName}}<br><br>
+
+                    {{/each}}
+                </ul>
+
+                <br>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+    <!-- Comments Form -->
+    <div class="card my-4">
+        <h5 class="card-header">Leave a Comment:</h5>
+        <div class="card-body">
+            <form action="/admin/comment/create" method="post">
+                <div class="form-group">
+                    <textarea name="cbody" class="form-control" rows="3"></textarea>
+
+                    <input type="hidden" value="{{fetchingPosts.id}}" name="id">
+                    <input type="hidden" value="{{fetchingPosts.slugs}}" name="slugs">
+                </div>
+                {{#if user}}<button type="submit" class="btn btn-primary">Submit</button>{{else}} <h4>Login Required <a
+                        href="/login">Login</a></h4>{{/if}}
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+    {{#each fetchingPosts.comments}}
+    <!-- Single Comment -->
+    <div class="media mb-4" uniqueIdentify="{{id}}">
+        <img class="d-flex mr-3 rounded" src="{{#gravatar user.email}}{{/gravatar}}" alt="">
+        <div class="media-body">
+            <h5 class="mt-0">{{user.firstName}}</h5>
+            {{id}}
+            {{comment}}
+            {{likeCount}}
+            <div class="view">
+                <p></p>
+            </div>
+        </div>
+        {{#i alluser=user.id commentId=id}} {{/i}}
+    </div>
+    {{/each}}
+    {{/if}}
+
+
+</div>
