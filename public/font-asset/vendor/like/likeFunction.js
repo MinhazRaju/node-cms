@@ -14,9 +14,9 @@ function liveClickResult(clickCount) {
 }
 
 $('#d').hide()
-$('#like').mouseover(function () {
+$('#likeViews').mouseover(function () {
     $('#d').show(function () {
-        $('#like').mouseleave(function () {
+        $('#likeViews').mouseleave(function () {
             $('#d').hide()
         })
     })
