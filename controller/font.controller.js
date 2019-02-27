@@ -73,7 +73,7 @@ exports.RegistrationCreate = (req, res, next) => {
 
     let secretCode;
     switch (body.secretCode) {
-        case 'okajaka':
+        case 'secretcode':
             secretCode = true
             break;
 
